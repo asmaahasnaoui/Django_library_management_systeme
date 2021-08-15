@@ -24,7 +24,7 @@
                 <div class="card-body">
                   <div class="d-flex">
                     <p class="d-flex flex-column">
-                      <span class="text-bold text-lg">500</span>
+                      <span class="text-bold text-lg">{{allbooks}}</span>
                       <span>اجمالي عدد الكتب</span>
                     </p>  
                   </div>
@@ -38,7 +38,36 @@
               <!-- /.card -->
             </div>
             <!-- /.col-md-6 -->
-            
+            {% for book in books %}
+            {% if book.price != None %}
+            {% if book.status == 'sold' %}
+            <p class="totalprice">{{book.price}}</p>
+            {% endif %}
+            {% endif %} 
+            {% if book.total_rental != None %}
+            {% if book.status == 'retal' %}
+            <p class="totalprice">{{book.total_rental}}</p>
+            {% endif %}
+            {% endif %}
+            {% endfor %}    
+            {% for book in books %}
+            {% if book.status == 'retal' %}
+            {% if book.total_rental != None %}
+            <p class="totalrental">{{book.total_rental}}</p>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+            <p class="salaryrental"></p>
+            {% for book in books %}
+            {% if book.status == 'sold' %}
+            {% if book.price != None %}
+            <p class="totalsold">{{book.price}}</p>
+            {% endif %}
+            {% endif %}
+
+            {% endfor %}
+            <p class="salarysold"></p>
+                   
             <div class="col-lg-6">
               <div class="card">
                 <div class="card-header border-0">
@@ -49,7 +78,7 @@
                 <div class="card-body">
                   <div class="d-flex">
                     <p class="d-flex flex-column">
-                      <span id="totalsalarys" class="text-bold text-lg">$250</span><br></p>
+                      <span id="totalsalarys" class="text-bold text-lg">$</span><br></p>
                   </div>
                   <!-- /.d-flex -->
   
@@ -186,11 +215,11 @@
                         {% if book.status == 'available' %}
                         <h5 class="description-header text-success">{{book.status}}</h5>
                         <span class="description-text">الحالة</span>
-                        {% elif book.status == 'rental' %}
+                        {% elif book.status == 'retal' %}
                         <h5 class="description-header text-warning">{{book.status}}</h5>
                         <span class="description-text">الحالة</span>
                         {% else %}
-                        <h5 class="description-header text-denger">{{book.status}}</h5>
+                        <h5 class="description-header text-danger">{{book.status}}</h5>
                         <span class="description-text">الحالة</span>
                         {% endif %}
                       </div>

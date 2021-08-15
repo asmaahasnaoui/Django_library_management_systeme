@@ -54,7 +54,43 @@
 <script src="{% static 'dist/js/demo.js' %}"></script>
 <!--<script src="{% static 'plugins/js/pages/dashboard3.js'"></script>
 -->
-<script>$("#catinput").hide()
+<script>
+  $(document).ready(function(){
+    var total=0;
+    $('.totalprice').each(function(){
+      
+      $(this).hide()
+      var salary=$(this).text()
+      total += parseInt(salary)
+    });
+    $("#totalsalarys").text($("#totalsalarys").text()+total)
+
+  });
+  var total1=0;
+  $('.totalrental').each(function(){
+    $(this).hide()
+    var salary1=$(this).text()
+    total1 += parseInt(salary1)
+
+  });
+  $('.salaryrental').text(total1)
+  $('.salaryrental').hide()
+  
+  
+  var total2=0;
+  $('.totalsold').each(function(){
+    $(this).hide()
+    var salary2=$(this).text()
+    total2 += parseInt(salary2)
+
+  });
+  $('.salarysold').text(total2)
+  $('.salarysold').hide()
+
+ $("#rentaldays").keyup(function(){
+   $("#totalrental").val($("#rentaldays").val()*$("#rentalprice").val())
+ }) 
+$("#catinput").hide()
 $("#addcat").click(function(){
   $("#catinput").show()
 });
@@ -132,14 +168,14 @@ $(function () {
           backgroundColor: '#007bff',
           borderColor    : '#007bff',
           data           : [ 
-               '50',
+          $(".salarysold").text()
           ]
         },
         {
           backgroundColor: '#ced4da',
           borderColor    : '#ced4da',
           data           : [ 
-                '30',
+          $(".salaryrental").text()
           ]
         }
       ]
@@ -199,7 +235,7 @@ $(function () {
     type: 'pie',
     data: {
       datasets: [{
-        data: ['35','25','40'],
+        data: ['{{bookavailable}}','{{booksold}}','{{bookrental}}'],
         backgroundColor :["#27c100","#f3545d","#fdaf4b"],
         borderWidth: 10,
         
